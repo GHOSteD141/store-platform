@@ -1,7 +1,7 @@
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowDown, Camera } from "lucide-react";
-import { useRef } from "react";
 import { Layout } from "@/components/Layout";
 import { ProductCard } from "@/components/ProductCard";
 import { CollectionCard } from "@/components/CollectionCard";
@@ -30,20 +30,41 @@ const Index = () => {
     "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400&q=80",
     "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400&q=80",
   ];
+  // Set a fallback image just in case the database takes a second to load
+  const [heroImage, setHeroImage] = useState("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80");
 
+  useEffect(() => {
+    // This will fetch your dynamic image from your MongoDB backend
+    const fetchHeroImage = async () => {
+      try {
+        // We will build this API route in the backend next!
+        const response = await fetch("http://localhost:5000/api/settings/hero");
+        const data = await response.json();
+        
+        if (data.imageUrl) {
+          setHeroImage(data.imageUrl); // Update the screen with the database image!
+        }
+      } catch (error) {
+        console.error("Failed to fetch hero image, using fallback.", error);
+      }
+    };
+// this line was added by gemini to fetch the hero image from the backend when the component mounts
+    fetchHeroImage();
+  }, []);
   return (
     <Layout>
-      {/* Hero Section — Full Viewport */}
+     {/* Hero Section — Full Viewport */}
       <section ref={heroRef} className="relative h-[100svh] -mt-16 md:-mt-20 overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
+          {/* Notice we changed the src right here! */}
           <img
-            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80"
+            src={heroImage}
             alt="Curated home lifestyle"
             className="w-full h-[120%] object-cover animate-ken-burns"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-charcoal/10 to-charcoal/50" />
         </motion.div>
-
+        
         <motion.div
           className="relative container-full h-full flex flex-col justify-end pb-20 md:pb-28 pt-16 md:pt-20"
           style={{ opacity: heroOpacity }}
