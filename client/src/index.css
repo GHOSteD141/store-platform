@@ -3,6 +3,8 @@
 @import "tailwindcss";
 
 @theme {
+  /*i have no idea what is this even for but it was in the original code so here we are*/
+  /*its used to control the color values throughout the application apparantly*/
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
@@ -52,14 +54,16 @@
 @layer base {
   :root {
     /* Warm neutral palette */
+    /*it uses HSL apprantly idk who thought it was a good idea but here we are*/
+    /* note : its - hue : saturation : lightness (hue is mesured in degrees 0-360) */
     --background: 40 33% 97%;
     --foreground: 30 10% 15%;
     --card: 40 30% 95%;
     --card-foreground: 30 10% 15%;
     --popover: 40 33% 97%;
     --popover-foreground: 30 10% 15%;
-    --primary: 18 45% 45%;
-    --primary-foreground: 40 33% 97%;
+    --primary: 347 67% 89%;
+    --primary-foreground: 30 10% 15%;
     --secondary: 30 15% 85%;
     --secondary-foreground: 30 10% 20%;
     --muted: 30 10% 90%;
@@ -70,29 +74,31 @@
     --destructive-foreground: 40 33% 97%;
     --border: 30 15% 88%;
     --input: 30 15% 88%;
-    --ring: 18 45% 45%;
+    --ring: 347 67% 89%;
     --radius: 0.25rem;
 
     /* Custom tokens */
-    --terracotta: 18 45% 45%;
-    --terracotta-light: 18 45% 55%;
+    /* no idea at all man, new thing for me */
+    --terracotta: 347 67% 89%;
+    --terracotta-light: 347 67% 95%;
     --warm-cream: 40 33% 97%;
     --warm-taupe: 30 15% 75%;
     --charcoal: 30 10% 15%;
     --linen: 35 25% 93%;
     
     /* Typography */
+    /* whatever we type style */
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-sans: 'Inter', system-ui, sans-serif;
 
     --sidebar-background: 40 30% 95%;
     --sidebar-foreground: 30 10% 25%;
-    --sidebar-primary: 18 45% 45%;
-    --sidebar-primary-foreground: 40 33% 97%;
+    --sidebar-primary: 347 67% 89%;
+    --sidebar-primary-foreground: 30 10% 15%;
     --sidebar-accent: 35 40% 92%;
     --sidebar-accent-foreground: 30 10% 20%;
     --sidebar-border: 30 15% 88%;
-    --sidebar-ring: 18 45% 45%;
+    --sidebar-ring: 347 67% 89%;
   }
 
   .dark {
@@ -102,8 +108,8 @@
     --card-foreground: 40 20% 90%;
     --popover: 30 10% 10%;
     --popover-foreground: 40 20% 90%;
-    --primary: 18 50% 55%;
-    --primary-foreground: 30 10% 10%;
+    --primary: 347 67% 89%;
+    --primary-foreground: 30 10% 15%;
     --secondary: 30 10% 20%;
     --secondary-foreground: 40 20% 90%;
     --muted: 30 10% 18%;
@@ -114,9 +120,9 @@
     --destructive-foreground: 40 20% 90%;
     --border: 30 10% 20%;
     --input: 30 10% 20%;
-    --ring: 18 50% 55%;
-    --terracotta: 18 50% 55%;
-    --terracotta-light: 18 50% 65%;
+    --ring: 347 67% 89%;
+    --terracotta: 347 67% 89%;
+    --terracotta-light: 347 67% 95%;
     --warm-cream: 30 10% 10%;
     --warm-taupe: 30 10% 30%;
     --charcoal: 40 20% 90%;
@@ -124,12 +130,12 @@
 
     --sidebar-background: 30 10% 12%;
     --sidebar-foreground: 40 20% 90%;
-    --sidebar-primary: 18 50% 55%;
-    --sidebar-primary-foreground: 30 10% 10%;
+    --sidebar-primary: 347 67% 89%;
+    --sidebar-primary-foreground: 30 10% 15%;
     --sidebar-accent: 30 15% 18%;
     --sidebar-accent-foreground: 40 20% 90%;
     --sidebar-border: 30 10% 20%;
-    --sidebar-ring: 18 50% 55%;
+    --sidebar-ring: 347 67% 89%;
   }
 
   * {

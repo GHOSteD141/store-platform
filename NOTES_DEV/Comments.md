@@ -7,3 +7,13 @@
 - what to update first?--
 
 lets go hero page -- mom pic + text
+
+- used a mongodb atlas for the server , check server env file for context
+
+-  using a service called cloudinary for img storage in format of links
+
+- going to add a extra admin page that can be used by me to update product list
+
+- made all necessary connection to mongo ready to upload data 
+
+- also need to make admin page in client - src - pages
