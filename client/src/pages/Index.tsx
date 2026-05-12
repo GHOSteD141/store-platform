@@ -30,6 +30,7 @@ const Index = () => {
     "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400&q=80",
     "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400&q=80",
   ];
+  
   // Set a fallback image just in case the database takes a second to load
   const [heroImage, setHeroImage] = useState("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80");
 
@@ -37,26 +38,27 @@ const Index = () => {
     // This will fetch your dynamic image from your MongoDB backend
     const fetchHeroImage = async () => {
       try {
-        // We will build this API route in the backend next!
-        const response = await fetch("http://localhost:5000/api/settings/hero");
+        // Corrected the API route to match the backend we built!
+        const response = await fetch("http://localhost:5000/api/hero");
         const data = await response.json();
         
-        if (data.imageUrl) {
+        if (data && data.imageUrl) {
           setHeroImage(data.imageUrl); // Update the screen with the database image!
         }
       } catch (error) {
         console.error("Failed to fetch hero image, using fallback.", error);
       }
     };
-// this line was added by gemini to fetch the hero image from the backend when the component mounts
+    
     fetchHeroImage();
   }, []);
+
   return (
     <Layout>
      {/* Hero Section — Full Viewport */}
       <section ref={heroRef} className="relative h-[100svh] -mt-16 md:-mt-20 overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: heroImageY }}>
-          {/* Notice we changed the src right here! */}
+          {/* Using the dynamic heroImage state here */}
           <img
             src={heroImage}
             alt="Curated home lifestyle"
