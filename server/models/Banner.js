@@ -1,9 +1,22 @@
 import mongoose from 'mongoose';
 
 const bannerSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  imageUrl: { type: String, required: true }, // This is where the Cloudinary link goes!
-  isActive: { type: Boolean, default: true }
+  location: { 
+    type: String, 
+    required: true, 
+    unique: true 
+  },
+  imageUrl: { 
+    type: String, 
+    required: true 
+  },
+  // THIS IS THE VIP GUEST WE NEED TO ADD!
+  previousImageUrl: { 
+    type: String 
+  },
+  title: { 
+    type: String 
+  }
 }, { timestamps: true });
 
 export default mongoose.model('Banner', bannerSchema);

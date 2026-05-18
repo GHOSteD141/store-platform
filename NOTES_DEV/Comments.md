@@ -17,3 +17,7 @@ lets go hero page -- mom pic + text
 - made all necessary connection to mongo ready to upload data 
 
 - also need to make admin page in client - src - pages
+
+- img not ready - acc got banned - will go for the product page redesign
+
+- ok acc back in action also admin page is midway till done , but need to update the main page
