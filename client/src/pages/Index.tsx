@@ -31,22 +31,22 @@ const Index = () => {
     "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=400&q=80",
   ];
   
-  // Set a fallback image just in case the database takes a second to load
+  // Set a fallback image just in case the database takes a second to load or is empty
   const [heroImage, setHeroImage] = useState("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=80");
 
   useEffect(() => {
-    // This will fetch your dynamic image from your MongoDB backend
+    // Fetch the dynamic images from our new Site Imagery endpoint
     const fetchHeroImage = async () => {
       try {
-        // Corrected the API route to match the backend we built!
-        const response = await fetch("http://localhost:5000/api/hero");
+        const response = await fetch("http://localhost:5000/api/site-images");
         const data = await response.json();
         
-        if (data && data.imageUrl) {
-          setHeroImage(data.imageUrl); // Update the screen with the database image!
+        // Look specifically for the 'home-hero' slot and grab its live image
+        if (data['home-hero'] && data['home-hero'].live) {
+          setHeroImage(data['home-hero'].live); 
         }
       } catch (error) {
-        console.error("Failed to fetch hero image, using fallback.", error);
+        console.error("Failed to fetch site images, using fallback.", error);
       }
     };
     

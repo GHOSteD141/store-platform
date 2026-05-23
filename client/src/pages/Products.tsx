@@ -1,7 +1,7 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { ProductCard } from "@/components/ProductCard";
 import { products, collections, getCollectionBySlug } from "@/data/products";
@@ -29,6 +29,45 @@ const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCollection = searchParams.get("collection") || "all";
   const activeSort = (searchParams.get("sort") as SortOption) || "featured";
+
+  // --- NEW: Fetch ALL dynamic banners from the database ---
+  const [siteImages, setSiteImages] = useState<Record<string, any>>({});
+
+  useEffect(() => {
+    const fetchSiteImages = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/site-images");
+        const data = await response.json();
+        setSiteImages(data);
+      } catch (error) {
+        console.error("Failed to fetch site images", error);
+      }
+    };
+    
+    fetchSiteImages();
+  }, []);
+
+  // Determine which banner to show based on the active tab
+  const currentCollection = activeCollection !== "all"
+    ? getCollectionBySlug(activeCollection)
+    : null;
+
+  const getDisplayBanner = () => {
+    // 1. If we are on the main "All Pieces" tab, use the Shop All banner
+    if (activeCollection === "all") {
+      return siteImages['shop-all']?.live || "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80";
+    }
+    
+    // 2. If we are on a specific category (e.g., 'crystal-trees'), dynamically look for 'crystal-trees-banner'
+    const dynamicBannerKey = `${activeCollection}-banner`;
+    if (siteImages[dynamicBannerKey]?.live) {
+      return siteImages[dynamicBannerKey].live;
+    }
+
+    // 3. Ultimate fallback to the dummy data image if no custom banner is uploaded yet
+    return currentCollection?.heroImage || "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80";
+  };
+  // ----------------------------------------------------------------
 
   const filteredAndSortedProducts = useMemo(() => {
     let result = [...products];
@@ -64,10 +103,6 @@ const Products = () => {
     return result;
   }, [activeCollection, activeSort]);
 
-  const currentCollection = activeCollection !== "all"
-    ? getCollectionBySlug(activeCollection)
-    : null;
-
   const handleFilterChange = (slug: string) => {
     const newParams = new URLSearchParams(searchParams);
     if (slug === "all") {
@@ -94,10 +129,7 @@ const Products = () => {
       <section className="relative h-[40vh] md:h-[55vh] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={
-              currentCollection?.heroImage ||
-              "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80"
-            }
+            src={getDisplayBanner()}
             alt={currentCollection?.name || "All Products"}
             className="w-full h-full object-cover transition-opacity duration-700"
           />

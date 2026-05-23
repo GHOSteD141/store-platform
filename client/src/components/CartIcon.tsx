@@ -9,21 +9,24 @@ export const CartIcon = () => {
   return (
     <Link
       to="/cart"
-      className="relative p-2 hover:bg-accent transition-colors duration-300 group"
+      className="flex items-center gap-2 p-2 hover:text-primary transition-colors duration-300 group"
     >
-      <ShoppingBag className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
-      <AnimatePresence>
-        {itemCount > 0 && (
-          <motion.span
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-semibold rounded-full flex items-center justify-center"
-          >
-            {itemCount > 9 ? "9+" : itemCount}
-          </motion.span>
-        )}
-      </AnimatePresence>
+      <div className="relative">
+        <ShoppingBag className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+        <AnimatePresence>
+          {itemCount > 0 && (
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              className="absolute -top-1.5 -right-2 w-4 h-4 bg-primary text-primary-foreground text-[10px] font-semibold rounded-full flex items-center justify-center"
+            >
+              {itemCount > 9 ? "9+" : itemCount}
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </div>
+      <span className="text-sm font-medium tracking-wide hidden md:inline-block">Bag</span>
     </Link>
   );
 };

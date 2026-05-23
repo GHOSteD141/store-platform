@@ -21,3 +21,11 @@ lets go hero page -- mom pic + text
 - img not ready - acc got banned - will go for the product page redesign
 
 - ok acc back in action also admin page is midway till done , but need to update the main page
+
+- ok so new issue the firebase is not working for me as google cloud wants 5000 tf man , well so i am leaving it 
+
+- new stack - cloudinary- img store, Render- express/and payments, vercel- web host,github - code store, mongodb - database, razorpay - payment only, Uptime Robot - to keep render awake   
+
+- got the  razor key ok now lets see what is needed to be done 
+
+- 
