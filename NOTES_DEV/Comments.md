@@ -28,4 +28,6 @@ lets go hero page -- mom pic + text
 
 - got the  razor key ok now lets see what is needed to be done 
 
+- new changes, october 1, 2026 shifting away from that to oracle cloud stack for better preformance?, also going forward with frappe as gui/ website changer
+
 - 
